@@ -2,6 +2,9 @@
 
 #include "stdafx.h"
 #include "Form1.h"
+#include "Employee.h"
+#include "Company.h"
+
 
 using namespace L5;
 
@@ -15,4 +18,8 @@ int main(array<System::String ^> ^args)
 	// Create the main window and run it
 	Application::Run(gcnew Form1());
 	return 0;
+}
+
+Company::Company(void)
+{
 }

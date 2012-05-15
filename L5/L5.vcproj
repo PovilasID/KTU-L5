@@ -230,6 +230,14 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
+				RelativePath=".\Company.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Employee.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Form1.h"
 				FileType="3"
 				>
@@ -238,6 +246,14 @@
 					SubType="Designer"
 					>
 				</File>
+			</File>
+			<File
+				RelativePath=".\functions.h"
+				>
+			</File>
+			<File
+				RelativePath=".\PriceList.h"
+				>
 			</File>
 			<File
 				RelativePath=".\resource.h"
