@@ -19,7 +19,3 @@ int main(array<System::String ^> ^args)
 	Application::Run(gcnew Form1());
 	return 0;
 }
-
-Company::Company(void)
-{
-}
