@@ -263,6 +263,10 @@
 				RelativePath=".\stdafx.h"
 				>
 			</File>
+			<File
+				RelativePath=".\Workers.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Resource Files"

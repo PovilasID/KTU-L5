@@ -1,5 +1,5 @@
 #pragma once
-
+#include "LISTS.h"
 
 namespace L5 {
 
@@ -41,6 +41,9 @@ namespace L5 {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::TextBox^  textBox1;
+	protected: 
 
 	private:
 		/// <summary>
@@ -55,13 +58,95 @@ namespace L5 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"Form1";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
+			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(118, 9);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(117, 23);
+			this->button1->TabIndex = 0;
+			this->button1->Text = L"Pasirinkti aplanka...";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Form1::button1_Click);
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(12, 11);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 1;
+			this->textBox1->Text = L"*.txt";
+			// 
+			// Form1
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(572, 310);
+			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->button1);
+			this->Name = L"Form1";
+			this->Text = L"Form1";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+				System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1 = gcnew System::Windows::Forms::FolderBrowserDialog();
+				if (textBox1->Text == L"") {
+				MessageBox::Show (L"Áraðykite ðablonà", L"Neávesta reikðmë", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				return;
+				}
+
+				if (folderBrowserDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK && folderBrowserDialog1->SelectedPath ->Length > 0) {
+				//listBox1->Items->Clear();             // Iðvalome listBox1 komponentà
+
+				WIN32_FIND_DATA ffd;                  // Paieðkai reikalingi ...
+				HANDLE hFind = INVALID_HANDLE_VALUE;  // ... tarnybiniai kintamieji
+
+				// Funkcijai PtrToStringChars() reikalingas #include <vcclr.h>
+				pin_ptr<const wchar_t> pletinys = PtrToStringChars(textBox1->Text);
+
+				TCHAR katalogas[MAX_PATH];        // Saugosime kelià iki duomenø failø
+				TCHAR paieskosSablonas[MAX_PATH]; // Saugosime paieðkos ðablonà
+				TCHAR pilnasVardas[MAX_PATH];     // Saugosime konkretaus duomenø failo pilnà (su keliu) vardà
+
+				// Sudarome kelià á katalogà, kuriame sudëti duomenø failai
+				pin_ptr<const wchar_t> pasirinktasKatalogas = PtrToStringChars(folderBrowserDialog1->SelectedPath);
+				StringCchCopy(katalogas, MAX_PATH, pasirinktasKatalogas);
+				StringCchCat(katalogas, MAX_PATH, TEXT("\\"));
+				//label1->Text = gcnew String(katalogas);
+
+				// Sudarome paieðkos ðablonà
+				StringCchCopy(paieskosSablonas, MAX_PATH, katalogas);
+				StringCchCat(paieskosSablonas, MAX_PATH, pletinys);
+
+				// Atliekame paieðkà
+				hFind = FindFirstFile(paieskosSablonas, &ffd);
+				if (hFind == INVALID_HANDLE_VALUE) { // Tikriname, gal nëra nei vieno ðablonà atitinkanèio failo
+					//listBox1->Items->Add(gcnew String(L"Ðablonà atitinkanèiø failø nerasta."));
+					return;
+				}
+				do {
+					// Sudarome pilnà (su keliu) rasto duomenø failo vardà
+					StringCchCopy(pilnasVardas, MAX_PATH, katalogas);
+					StringCchCat(pilnasVardas, MAX_PATH, ffd.cFileName);
+                 
+					// naudojame failo vardà, kuris saugomas kintamajame pilnasVardas,
+					// pavyzdþiui, ifstream fd(pilnasVardas);
+
+					// ðioje programoje tiesiog iðvedame listBox1 komponente
+					//listBox1->Items->Add(String::Format(L"{0}", gcnew String(pilnasVardas)));
+					editCompany().Read(SysStrToStr(gcnew String(pilnasVardas)));
+
+				} while (FindNextFile(hFind, &ffd) != 0);
+				FindClose(hFind);
+				}
+
+			 }
 	};
 }
 

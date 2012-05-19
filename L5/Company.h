@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include "functions.h"
+#include "Employee.h"
 
 class Company{
 private:
@@ -16,20 +17,20 @@ private:
 
 	Period * P;
 	
-	void _AddEmployee(string fn, string name, string office, int year,int month, int day, int hours, bool first){
+	void _AddEmployee(string fn, string name, string office, string year, string month, string day, string hours, bool first){
 		bool notNull = false;
 		Period *e = P;
 		struct tm  *timeStruct;
 		time_t beginning, end, date;
+		string sTemp;
+		sTemp = fn.substr(-25,4);
 		if (first){		
-			timeStruct->tm_year = atoi(fn.substr(0,4).c_str()) - 1900;
-			timeStruct->tm_mon = atoi(fn.substr(5,2).c_str()) -1;
-			timeStruct->tm_mon = atoi(fn.substr(8,2).c_str());
-			beginning = mktime(timeStruct);
-			timeStruct->tm_year = atoi(fn.substr(11,4).c_str()) - 1900;
-			timeStruct->tm_mon = atoi(fn.substr(16,2).c_str()) - 1;
-			timeStruct->tm_mon = atoi(fn.substr(19,2).c_str());
-			end = mktime(timeStruct);
+			beginning = TimeToSeconds(atoi(fn.substr(-25,4).c_str()),
+				atoi(fn.substr(-20,2).c_str()),
+				atoi(fn.substr(-17,2).c_str()));
+			end = TimeToSeconds(atoi(fn.substr(-14,4).c_str()),
+				atoi(fn.substr(-9,2).c_str()),
+				atoi(fn.substr(-6,2).c_str()));
 			e = e->next;
 			e = new Period; 
 			e->branch = NULL;
@@ -39,29 +40,18 @@ private:
 			P = e;
 		}
 
-		timeStruct->tm_year = year - 1900;
-		timeStruct->tm_mon = month -1;
-		timeStruct->tm_mon = day;
-		date = mktime(timeStruct);
+		date = TimeToSeconds(atoi(year.c_str()), atoi(month.c_str()), atoi(day.c_str()));
+			mktime(timeStruct);
 		Department *d = new Department;
-		d->E = Employee(name, office, date, hours);
+		d->E = Employee(name, office, date, atoi(hours.c_str()));
 		d->next = e->branch;
 		e->branch = d;
 	}
-	void _BranchuOutput(ofstream & fr, time_t beginning, time_t end, Department *branch){
-		Department *t;
-		time(&beginning);
-		struct tm  *timeStruct = localtime(&beginning);
-		char buffer1 [80];
-		strftime(buffer1,80,"%Y-%m-%d",timeStruct);
-		time(&end);
-		timeStruct = localtime(&end);
-		char buffer2 [80];
-		strftime(buffer2,80,"%Y-%m-%d",timeStruct);
-		fr << buffer1 << " " << buffer2 << endl; //Write a function for this mess
-		while (t != NULL)   {                    
-			fr << t->E.getName() << " " << t->E.getOffice() << " " << t->E.getDate() << t->E.getHours() << endl;
-			t = t->next;
+	void _BranchOutput(ofstream & fr, time_t beginning, time_t end, Department *branch){
+		fr << TimeToString(beginning) << " " << TimeToString(end) << endl; 
+		while (branch != NULL)   {                    
+			fr << branch->E.getName() << " " << branch->E.getOffice() << " " << branch->E.getDate() << branch->E.getHours() << endl;
+			branch = branch->next;
 		}
 	}
 
@@ -80,19 +70,29 @@ public:
 
 	void Read(string fn){
 		ifstream fs(fn.c_str());
-		string name, office;
-		int  year, month, day, hours;
+		string name, office, year, month, day, hours;
 		char line[100];
 		bool first = true;
 		while (!fs.eof())   { 
 			fs.get(line, 25);  
 			name = line;
 			fs >> ws;                       
-			fs.get(line, 40);  
-			office = line;   
-			fs >> year >> month >> day >> hours;                        
+			fs.get(line, 20);  
+			office = line;
+			fs >> ws;
+			fs.get(line, 5);
+			year = line;
+			fs >> ws;
+			fs.get(line, 3);
+			month = line;
+			fs >> ws;
+			fs.get(line, 3);
+			day = line;
+			fs >> ws;
+			fs.get(line, 11);
+			hours = line;                        
 			fs.ignore ();
-			_AddEmployee(fn, name, office, year, month, day, hours, first);
+			_AddEmployee(fn, trim(name), trim(office), year, month, day, trim(hours), first);
 			first = false;
 		}
 		fs.close();
@@ -102,7 +102,7 @@ public:
 		ofstream fr(fn.c_str(), ios::app);
 		Period *e = P;
 		while (e != NULL)   {
-			_BranchuOutput(fr, e->begining, e->end, e->branch);
+			_BranchOutput(fr, e->begining, e->end, e->branch);
 			//Add line
 			fr << endl;
 			e = e->next;

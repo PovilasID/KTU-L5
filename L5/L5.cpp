@@ -4,6 +4,7 @@
 #include "Form1.h"
 #include "Employee.h"
 #include "Company.h"
+#include "Workers.h"
 
 
 using namespace L5;

@@ -13,7 +13,8 @@ private:
 	time_t date;
 	int hours;
 public:
-	Employee(string n = "", string o = "", time_t d = time(0), int h = 0):name(n), office(o), date(d), hours(h){}
+	Employee():name(""), office(""), date(time(0)), hours(0){}
+	Employee(string n, string o, time_t d, int h):name(n), office(o), date(d), hours(h){}
 	~Employee(){}
 
 	//Set

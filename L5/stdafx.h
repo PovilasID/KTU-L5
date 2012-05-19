@@ -4,3 +4,8 @@
 #pragma once
 
 // TODO: reference additional headers your program requires here
+#include <windows.h> // apraðytos failø ir katalogø tvarkymo f-jos ir tipai
+#include <strsafe.h> // apraðytos StringCchCat() ir StringCchCopy() f-jos
+#include <vcclr.h>   // apraðyta funkcija PtrToStringChars()
+#include <string>
+#include <time.h>

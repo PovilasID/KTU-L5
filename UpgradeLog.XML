@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="L5">
+</Property><Property Name="Solution File" Value="D:\GIT\KTU\L5\L5.sln">
+</Property><Property Name="User Options File" Value="D:\GIT\KTU\L5\L5.v11.suo">
+</Property><Property Name="Date" Value="2012 m. gegužės 19 d.">
+</Property><Property Name="Time" Value="13:42">
+</Property></Properties><Event ErrorLevel="3" Project="" Source="L5.sln" Description="SafeUpgrade">
+</Event><Event ErrorLevel="0" Project="" Source="L5.sln" Description="File successfully backed up as D:\GIT\KTU\L5\Backup\L5.sln">
+</Event><Event ErrorLevel="0" Project="" Source="L5.v11.suo" Description="File successfully backed up as D:\GIT\KTU\L5\Backup\L5.v11.suo">
+</Event><Event ErrorLevel="3" Project="L5" Source="L5\L5.vcproj" Description="OneWayUpgrade">
+</Event><Event ErrorLevel="0" Project="L5" Source="L5\L5.vcproj" Description="Converting project file 'D:\GIT\KTU\L5\L5\L5.vcproj'.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'CopyLocalDependencies' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="Attribute 'UseDependenciesInBuild' of 'AssemblyReference' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="All user macros reported below for configuration 'Debug|Win32' are used before their definition, which can cause undesirable build results; this is not supported in this release. You can resolve this by changing the inclusion order of the consuming property sheets and making sure they come after the property sheets defining the user macros.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="MSB4211: C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (172,5); The property &quot;RunCodeAnalysisDependsOn&quot; is being set to a value for the first time, but it was already consumed at &quot;C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (171,5)&quot;.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="All user macros reported below for configuration 'Release|Win32' are used before their definition, which can cause undesirable build results; this is not supported in this release. You can resolve this by changing the inclusion order of the consuming property sheets and making sure they come after the property sheets defining the user macros.">
+</Event><Event ErrorLevel="1" Project="L5" Source="L5\L5.vcproj" Description="MSB4211: C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (172,5); The property &quot;RunCodeAnalysisDependsOn&quot; is being set to a value for the first time, but it was already consumed at &quot;C:\Program Files (x86)\MSBuild\Microsoft\VisualStudio\v11.0\CodeAnalysis\Microsoft.CodeAnalysis.targets (171,5)&quot;.">
+</Event><Event ErrorLevel="0" Project="L5" Source="L5\L5.vcproj" Description="Done converting to new project file 'D:\GIT\KTU\L5\L5\L5.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="L5" Source="L5\L5.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="L5.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="L5.sln" Description="Converted">
+</Event></UpgradeLog>
