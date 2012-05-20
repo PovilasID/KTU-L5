@@ -42,5 +42,6 @@ public:
 		strftime(buffer,80,"%Y-%m-%d",timeStruct);
 		return buffer;
 	}
+	time_t getSeconds() { return date; }
 	int getHours(){ return hours; }
 };

@@ -1,5 +1,7 @@
 #pragma once
 #include "LISTS.h"
+#include <stdio.h>
+#include <fstream>
 
 namespace L5 {
 
@@ -43,6 +45,8 @@ namespace L5 {
 		}
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::TextBox^  textBox1;
+	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::RichTextBox^  richTextBox1;
 	protected: 
 
 	private:
@@ -60,6 +64,8 @@ namespace L5 {
 		{
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -80,11 +86,31 @@ namespace L5 {
 			this->textBox1->TabIndex = 1;
 			this->textBox1->Text = L"*.txt";
 			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(241, 8);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(95, 23);
+			this->button2->TabIndex = 2;
+			this->button2->Text = L"Pasirinkti faila...";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Form1::button2_Click);
+			// 
+			// richTextBox1
+			// 
+			this->richTextBox1->Location = System::Drawing::Point(12, 37);
+			this->richTextBox1->Name = L"richTextBox1";
+			this->richTextBox1->Size = System::Drawing::Size(548, 261);
+			this->richTextBox1->TabIndex = 3;
+			this->richTextBox1->Text = L"";
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(572, 310);
+			this->Controls->Add(this->richTextBox1);
+			this->Controls->Add(this->button2);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button1);
 			this->Name = L"Form1";
@@ -146,7 +172,38 @@ namespace L5 {
 				FindClose(hFind);
 				}
 
+				//*************************ADD PORTECTION FROM DOUBLES , CREATE FILE CONSTANTS******************************
+				ofstream fc("Results.txt");
+				if (fc.good()){
+					fc << "";
+					fc.close();
+				}
+				getCompany().Otput("Results.txt");
+				setWorkers(&getCompany().CompanyToWorkers());
+				getWorkers().output("Results.txt");
+
+				richTextBox1->LoadFile("Results.txt", RichTextBoxStreamType::PlainText);
 			 }
-	};
+	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+			  IO::Stream^ myStream;
+			  OpenFileDialog^ openFileDialogPrices = gcnew OpenFileDialog;
+
+			  openFileDialogPrices->Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+			  openFileDialogPrices->FilterIndex = 2;
+			  openFileDialogPrices->RestoreDirectory = true;
+
+			  if ( openFileDialogPrices->ShowDialog() == System::Windows::Forms::DialogResult::OK ){
+				if ( (myStream = openFileDialogPrices->OpenFile()) != nullptr ){
+					//setRecipesFile(openFileDialogPrices->FileName);
+					//if(getOrdersFile() != nullptr){
+						//button1->Enabled = true;
+					//}
+					editPriceList().read(SysStrToStr(openFileDialogPrices->FileName));
+					getPriceList().output("Results.txt");
+                  myStream->Close();
+				}
+			  }
+			 }
+};
 }
 

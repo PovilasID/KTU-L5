@@ -2,6 +2,7 @@
 #include <fstream>
 #include "functions.h"
 #include "Employee.h"
+#include "Workers.h"
 
 class Company{
 private:
@@ -18,20 +19,18 @@ private:
 	Period * P;
 	
 	void _AddEmployee(string fn, string name, string office, string year, string month, string day, string hours, bool first){
-		bool notNull = false;
 		Period *e = P;
 		struct tm  *timeStruct;
 		time_t beginning, end, date;
 		string sTemp;
-		sTemp = fn.substr(-25,4);
+		string source = fn.substr(fn.length()-25, 21);
 		if (first){		
-			beginning = TimeToSeconds(atoi(fn.substr(-25,4).c_str()),
-				atoi(fn.substr(-20,2).c_str()),
-				atoi(fn.substr(-17,2).c_str()));
-			end = TimeToSeconds(atoi(fn.substr(-14,4).c_str()),
-				atoi(fn.substr(-9,2).c_str()),
-				atoi(fn.substr(-6,2).c_str()));
-			e = e->next;
+			beginning = TimeToSeconds(atoi(source.substr(0,4).c_str()),
+				atoi(source.substr(5,2).c_str()),
+				atoi(source.substr(8,2).c_str()));
+			end = TimeToSeconds(atoi(source.substr(11,4).c_str()),
+				atoi(source.substr(16,2).c_str()),
+				atoi(source.substr(19,2).c_str()));
 			e = new Period; 
 			e->branch = NULL;
 			e->begining = beginning;
@@ -48,9 +47,9 @@ private:
 		e->branch = d;
 	}
 	void _BranchOutput(ofstream & fr, time_t beginning, time_t end, Department *branch){
-		fr << TimeToString(beginning) << " " << TimeToString(end) << endl; 
+		fr << "Atsikaitymo periodas nuo: " << TimeToString(beginning) << " iki " << TimeToString(end) << endl; 
 		while (branch != NULL)   {                    
-			fr << branch->E.getName() << " " << branch->E.getOffice() << " " << branch->E.getDate() << branch->E.getHours() << endl;
+			fr << branch->E.getName() << " " << branch->E.getOffice() << " " << branch->E.getDate() << " " << branch->E.getHours() << endl;
 			branch = branch->next;
 		}
 	}
@@ -118,5 +117,20 @@ public:
 			_BranchDestroy(e->branch);
 			delete e;
 		}
+	}
+
+	//**************************PROTECTION AGAINST DUPLICATES*****************************
+	//Add hours and set latest adress
+	Workers CompanyToWorkers(){
+		Workers *W = new Workers();
+		Period *e = P;
+		while (e != NULL)   {
+			while(e->branch != NULL){
+				W->addPerson(Employee(e->branch->E.getName(), e->branch->E.getOffice(), e->branch->E.getSeconds(), e->branch->E.getHours()));
+				e->branch = e->branch->next;
+			}
+			e = e->next;
+		}
+		return *W;
 	}
 };

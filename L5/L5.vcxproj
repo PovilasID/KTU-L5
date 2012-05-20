@@ -127,6 +127,7 @@
     </ClInclude>
     <ClInclude Include="functions.h" />
     <ClInclude Include="LISTS.h" />
+    <ClInclude Include="Price.h" />
     <ClInclude Include="PriceList.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
@@ -140,7 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\DATA\2004-05-07-2005-06-07.txt" />
+    <Text Include="..\PriceList.txt" />
     <Text Include="ReadMe.txt" />
+    <Text Include="Results.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Form1.resX">

@@ -3,6 +3,7 @@
 #include <time.h>
 #include <functional> 
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
@@ -43,11 +44,23 @@ string TimeToString(time_t date, char *format = "%Y-%m-%d"){
 	return (string)buffer;
 }
 
-time_t TimeToSeconds(int year,int month, int day){
-	struct tm  *timeStruct;
+time_t TimeToSeconds(int year, int month, int day){
+	time_t temp = time(0);
+	struct tm  *timeStruct = localtime(&temp);
+	
 	timeStruct->tm_year = year - 1900;
 	timeStruct->tm_mon = month -1;
 	timeStruct->tm_mon = day;
 	
 	return mktime(timeStruct);
 }
+
+double string_to_double(const string& s) {
+   istringstream i(s);
+   double x;
+   if (!(i >> x))
+	 return 0;
+   return x;
+ }
+
+

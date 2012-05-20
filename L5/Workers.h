@@ -5,6 +5,7 @@ class Workers{
 private:
 	struct Person{
 		Employee E;
+		double salary;
 		Person * next;
 	};
 
@@ -34,4 +35,18 @@ public:
 	}
 
 	Employee getPerson(){ return x->E; }
+
+	//**************************CHECK IF USING MAIN POINTER DOES ALOW TO REUSE IT************************************
+	void output(string fn){
+		ofstream fr(fn.c_str(), ios::app);
+		fr << "Darbuotoju sarasas " << endl; 
+		while (P != NULL)   {                    
+			fr << P->E.getName() << " " << P->E.getOffice() << " " << P->E.getDate() << " " << P->E.getHours() << endl;
+			P = P->next;
+		}
+		fr << endl;
+		fr.close();
+	}
+
+
 };

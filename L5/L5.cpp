@@ -5,6 +5,7 @@
 #include "Employee.h"
 #include "Company.h"
 #include "Workers.h"
+#include "PriceList.h"
 
 
 using namespace L5;

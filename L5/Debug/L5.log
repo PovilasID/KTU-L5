@@ -1,14 +1,14 @@
-﻿Build started 2012.05.19 23:43:07.
+﻿Build started 2012.05.20 23:55:29.
      1>Project "D:\GIT\KTU\L5\L5\L5.vcxproj" on node 2 (Build target(s)).
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /AI"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0" /AI"C:\Program Files (x86)\Windows Kits\8.0\Windows Metadata" /Zi /clr:pure /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _UNICODE /D UNICODE /EHa /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\L5.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /TP /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\mscorlib.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Data.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Drawing.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Windows.Forms.dll" /FU"C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.0\System.Xml.dll" /analyze- /errorReport:prompt /clr:nostdlib L5.cpp
          L5.cpp
-     1>d:\git\ktu\l5\l5\functions.h(39): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\git\ktu\l5\l5\functions.h(40): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\include\time.inl(112) : see declaration of 'localtime'
+     1>d:\git\ktu\l5\l5\functions.h(49): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
      1>d:\git\ktu\l5\l5\Employee.h(25): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
      1>d:\git\ktu\l5\l5\Employee.h(40): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-     1>d:\git\ktu\l5\l5\functions.h(48): warning C4700: uninitialized local variable 'timeStruct' used
-     1>d:\git\ktu\l5\l5\company.h(115): warning C4700: uninitialized local variable 'e' used
-     1>d:\git\ktu\l5\l5\company.h(44): warning C4700: uninitialized local variable 'timeStruct' used
+     1>d:\git\ktu\l5\l5\company.h(114): warning C4700: uninitialized local variable 'e' used
+     1>d:\git\ktu\l5\l5\company.h(43): warning C4700: uninitialized local variable 'timeStruct' used
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\GIT\KTU\L5\Debug\L5.exe" /INCREMENTAL /NOLOGO /ASSEMBLYRESOURCE:Debug\L5.Form1.resources /MANIFEST /ManifestFile:"Debug\L5.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\GIT\KTU\L5\Debug\L5.pdb" /ASSEMBLYDEBUG /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"main" /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /SAFESEH Debug\app.res
          Debug\AssemblyInfo.obj
          Debug\L5.obj
@@ -21,4 +21,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.12
+Time Elapsed 00:00:03.75
