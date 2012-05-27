@@ -47,6 +47,8 @@ namespace L5 {
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::Button^  button4;
 	protected: 
 
 	private:
@@ -66,6 +68,8 @@ namespace L5 {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->button4 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// button1
@@ -104,11 +108,33 @@ namespace L5 {
 			this->richTextBox1->TabIndex = 3;
 			this->richTextBox1->Text = L"";
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(342, 8);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 4;
+			this->button3->Text = L"Rikiuoti...";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Form1::button3_Click);
+			// 
+			// button4
+			// 
+			this->button4->Location = System::Drawing::Point(423, 8);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(75, 23);
+			this->button4->TabIndex = 5;
+			this->button4->Text = L"Ginti";
+			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &Form1::button4_Click);
+			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(572, 310);
+			this->Controls->Add(this->button4);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->textBox1);
@@ -121,50 +147,51 @@ namespace L5 {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+				/// <summary>	The first folder browser dialog. </summary>
 				System::Windows::Forms::FolderBrowserDialog^  folderBrowserDialog1 = gcnew System::Windows::Forms::FolderBrowserDialog();
 				if (textBox1->Text == L"") {
-				MessageBox::Show (L"Áraðykite ðablonà", L"Neávesta reikðmë", MessageBoxButtons::OK, MessageBoxIcon::Error);
+				MessageBox::Show (L"Ä®raÅ¡ykite Å¡ablonÄ…", L"NeÄ¯vesta reikÅ¡mÄ—", MessageBoxButtons::OK, MessageBoxIcon::Error);
 				return;
 				}
 
 				if (folderBrowserDialog1->ShowDialog() == System::Windows::Forms::DialogResult::OK && folderBrowserDialog1->SelectedPath ->Length > 0) {
-				//listBox1->Items->Clear();             // Iðvalome listBox1 komponentà
+				//listBox1->Items->Clear();             // IÅ¡valome listBox1 komponentÄ…
 
-				WIN32_FIND_DATA ffd;                  // Paieðkai reikalingi ...
+				WIN32_FIND_DATA ffd;                  // PaieÅ¡kai reikalingi ...
 				HANDLE hFind = INVALID_HANDLE_VALUE;  // ... tarnybiniai kintamieji
 
 				// Funkcijai PtrToStringChars() reikalingas #include <vcclr.h>
 				pin_ptr<const wchar_t> pletinys = PtrToStringChars(textBox1->Text);
 
-				TCHAR katalogas[MAX_PATH];        // Saugosime kelià iki duomenø failø
-				TCHAR paieskosSablonas[MAX_PATH]; // Saugosime paieðkos ðablonà
-				TCHAR pilnasVardas[MAX_PATH];     // Saugosime konkretaus duomenø failo pilnà (su keliu) vardà
+				TCHAR katalogas[MAX_PATH];        // Saugosime keliÄ… iki duomenÅ³ failÅ³
+				TCHAR paieskosSablonas[MAX_PATH]; // Saugosime paieÅ¡kos Å¡ablonÄ…
+				TCHAR pilnasVardas[MAX_PATH];     // Saugosime konkretaus duomenÅ³ failo pilnÄ… (su keliu) vardÄ…
 
-				// Sudarome kelià á katalogà, kuriame sudëti duomenø failai
+				// Sudarome keliÄ… Ä¯ katalogÄ…, kuriame sudÄ—ti duomenÅ³ failai
 				pin_ptr<const wchar_t> pasirinktasKatalogas = PtrToStringChars(folderBrowserDialog1->SelectedPath);
 				StringCchCopy(katalogas, MAX_PATH, pasirinktasKatalogas);
 				StringCchCat(katalogas, MAX_PATH, TEXT("\\"));
 				//label1->Text = gcnew String(katalogas);
 
-				// Sudarome paieðkos ðablonà
+				// Sudarome paieÅ¡kos Å¡ablonÄ…
 				StringCchCopy(paieskosSablonas, MAX_PATH, katalogas);
 				StringCchCat(paieskosSablonas, MAX_PATH, pletinys);
 
-				// Atliekame paieðkà
+				// Atliekame paieÅ¡kÄ…
 				hFind = FindFirstFile(paieskosSablonas, &ffd);
-				if (hFind == INVALID_HANDLE_VALUE) { // Tikriname, gal nëra nei vieno ðablonà atitinkanèio failo
-					//listBox1->Items->Add(gcnew String(L"Ðablonà atitinkanèiø failø nerasta."));
+				if (hFind == INVALID_HANDLE_VALUE) { // Tikriname, gal nÄ—ra nei vieno Å¡ablonÄ… atitinkanÄio failo
+					//listBox1->Items->Add(gcnew String(L"Å ablonÄ… atitinkanÄiÅ³ failÅ³ nerasta."));
 					return;
 				}
 				do {
-					// Sudarome pilnà (su keliu) rasto duomenø failo vardà
+					// Sudarome pilnÄ… (su keliu) rasto duomenÅ³ failo vardÄ…
 					StringCchCopy(pilnasVardas, MAX_PATH, katalogas);
 					StringCchCat(pilnasVardas, MAX_PATH, ffd.cFileName);
                  
-					// naudojame failo vardà, kuris saugomas kintamajame pilnasVardas,
-					// pavyzdþiui, ifstream fd(pilnasVardas);
+					// naudojame failo vardÄ…, kuris saugomas kintamajame pilnasVardas,
+					// pavyzdÅ¾iui, ifstream fd(pilnasVardas);
 
-					// ðioje programoje tiesiog iðvedame listBox1 komponente
+					// Å¡ioje programoje tiesiog iÅ¡vedame listBox1 komponente
 					//listBox1->Items->Add(String::Format(L"{0}", gcnew String(pilnasVardas)));
 					editCompany().Read(SysStrToStr(gcnew String(pilnasVardas)));
 
@@ -185,6 +212,7 @@ namespace L5 {
 				richTextBox1->LoadFile("Results.txt", RichTextBoxStreamType::PlainText);
 			 }
 	private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+			  /// <summary>	my stream. </summary>
 			  IO::Stream^ myStream;
 			  OpenFileDialog^ openFileDialogPrices = gcnew OpenFileDialog;
 
@@ -200,10 +228,28 @@ namespace L5 {
 					//}
 					editPriceList().read(SysStrToStr(openFileDialogPrices->FileName));
 					getPriceList().output("Results.txt");
+
+					editWorkers().addSalary(getPriceListPointer());
+					getWorkers().outputWithSallary("Results.txt");
+					
+					richTextBox1->LoadFile("Results.txt", RichTextBoxStreamType::PlainText);
                   myStream->Close();
 				}
 			  }
 			 }
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+			 editWorkers().sort();
+			 getWorkers().outputWithSallary("Results.txt");
+			 richTextBox1->LoadFile("Results.txt", RichTextBoxStreamType::PlainText);
+
+		 }
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+			 editCompany().DestroyLast();
+			 getCompany().Otput("Results.txt");
+			 richTextBox1->LoadFile("Results.txt", RichTextBoxStreamType::PlainText);
+
+				
+		 }
 };
 }
 
